@@ -6,20 +6,43 @@ import './App.css';
 import Header from './Header/Header';
 import Compose from './Compose/Compose';
 import Post from './Post/Post'
-
+import Search from './Header/Search/Search'
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      posts: []
+      posts: [],
+      
+      //BlackDiamond
+      search: ''
     };
 
     this.updatePost = this.updatePost.bind( this );
     this.deletePost = this.deletePost.bind( this );
     this.createPost = this.createPost.bind( this );
+
+    //Black Diamond
+    this.searchPost = this.searchPost.bind(this)
+    this.changeHandler = this.changeHandler.bind(this)
   }
   
+  //BLACK DIAMOND
+  searchPost(){
+    axios.get(`https://practiceapi.devmountain.com/api/posts/filter?text=${this.state.search}`)
+    .then(res => {
+      this.setState({search: res.data})
+    })
+
+  }
+
+  changeHandler(event){
+    this.setState({
+      search: event.target.value
+    })
+  }
+
+
   componentDidMount() {
     axios.get("https://practiceapi.devmountain.com/api/posts")
     .then(res => {
@@ -70,6 +93,8 @@ class App extends Component {
                 id={post.id}/>
             ))
           }
+
+          <Search changeHandlerFn={this.changeHandler}/>
           
         </section>
       </div>
