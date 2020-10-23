@@ -28,16 +28,14 @@ class App extends Component {
   }
 
   updatePost(id, text) {
-    //QUERY (`https://practiceapi.devmountain.com/api/posts?id=${ id }`, { text })
-    axios.put(`https://practiceapi.devmountain.com/api/posts/${id}/${text}`)
+    axios.put(`https://practiceapi.devmountain.com/api/posts?id=${ id }`, { text })
     .then(res => {
       this.setState({posts: res.data})
     })
   }
 
   deletePost(id) {
-    //QUERY axios.delete(`https://practiceapi.devmountain.com/api/posts?id=${ id }`)
-    axios.delete(`https://practiceapi.devmountain.com/api/posts/${id}/`)
+    axios.delete(`https://practiceapi.devmountain.com/api/posts?id=${ id }`)
     .then(res => {
       this.setState({posts: res.data})
     })
