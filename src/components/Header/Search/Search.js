@@ -13,6 +13,7 @@ export default class Search extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <section className="Search__parent">
 
